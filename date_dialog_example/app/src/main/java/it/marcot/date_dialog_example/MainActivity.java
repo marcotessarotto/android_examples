@@ -11,26 +11,46 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.TextView;
 
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements ISelectedData {
 
     public static final String TAG = "date_dialog_example";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
     }
 
     @Override
     public void onSelectedData(Instant instant) {
         Log.i(TAG,"onSelectedData: " + instant);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate( FormatStyle.LONG )
+                .withLocale( Locale.ITALIAN )
+                .withZone( ZoneId.systemDefault() );
+
+        String output = formatter.format( instant );
+
+        TextView text_view;
+
+        text_view = findViewById(R.id.text_view_output);
+
+        text_view.setText(output);
     }
 
     // TODO: replace with https://github.com/wdullaer/MaterialDateTimePicker
