@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements ISelectedData {
         Log.i(TAG,"onSelectedData: " + instant);
     }
 
-
+    // TODO: replace with https://github.com/wdullaer/MaterialDateTimePicker
     public static class DatePickerFragment extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {
 
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements ISelectedData {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-            Log.i(TAG,"RequestMeetingFragmentActivity DatePickerFragment onCreateDialog");
+            Log.i(TAG,"DatePickerFragment onCreateDialog");
 
             // Use the current date as the default date in the picker
             today = Instant.now();
@@ -82,12 +82,8 @@ public class MainActivity extends AppCompatActivity implements ISelectedData {
             int month = localDate.getMonthValue();
             int day = localDate.getDayOfMonth();
 
-//            Log.i(TAG, ""+ month + " " + day);
-
-
             // Create a new instance of DatePickerDialog and return it
             DatePickerDialog dialog = new DatePickerDialog(getActivity(), this, year, month, day);
-
 
             dialog.getDatePicker().setMinDate(first_available_day.getEpochSecond()*1000L);
             dialog.getDatePicker().setMaxDate(last_available_day.getEpochSecond()*1000L);
